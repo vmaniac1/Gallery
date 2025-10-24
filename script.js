@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const navLinks = document.querySelector('.nav-links');
 const menuToggle = document.createElement('button');
 menuToggle.className = 'menu-toggle';
-menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+menuToggle.innerHTML = '<i class="fas fa-bars fa-lg"></i>';
 document.querySelector('.navbar').insertBefore(menuToggle, navLinks);
 
 menuToggle.addEventListener('click', () => {
