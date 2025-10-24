@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">ArtSpace</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div id="vanta-background"></div>
+        <div class="hero-content">
+            <h1>Welcome to ArtSpace</h1>
+            <p>Discover the beauty of contemporary art</p>
+            <a href="#gallery" class="cta-button">Explore Gallery</a>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Our Collection</h2>
+        
+        <section class="art-section fade-in">
+            <div class="art-image">
+                <img src="img/1.jpg" alt="Art 1">
+            </div>
+            <div class="art-description">
+                <blockquote>"The essence of nature captured in strokes"</blockquote>
+                <p>A mesmerizing exploration of natural forms and colors</p>
+            </div>
+        </section>
+
+        <section class="art-section fade-in">
+            <div class="art-image">
+                <img src="img/2.jpg" alt="Art 2">
+            </div>
+            <div class="art-description">
+                <blockquote>"Abstract emotions in visual form"</blockquote>
+                <p>Where imagination meets reality in perfect harmony</p>
+            </div>
+        </section>
+
+        <section class="art-section fade-in">
+            <div class="art-image">
+                <img src="img/3.jpg" alt="Art 3">
+            </div>
+            <div class="art-description">
+                <blockquote>"Modern interpretation of classical themes"</blockquote>
+                <p>Bridging the gap between past and present</p>
+            </div>
+        </section>
+
+        <section class="art-section fade-in">
+            <div class="art-image">
+                <img src="img/4.jpg" alt="Art 4">
+            </div>
+            <div class="art-description">
+                <blockquote>"Symmetry in chaos"</blockquote>
+                <p>Finding balance in the unexpected</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- Add modal markup before closing body tag -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
