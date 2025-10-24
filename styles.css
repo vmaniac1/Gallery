@@ -163,14 +163,16 @@ body {
     transition: transform 0.5s ease;
     transform-style: preserve-3d;
     backface-visibility: hidden;
+    flex: 1;
+    max-width: 100%;
 }
 
 .art-image img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .art-image::before {
@@ -362,18 +364,28 @@ body {
 
     .art-section {
         flex-direction: column !important;
-        padding: 3rem 1rem;
-        min-height: auto;
-    }
-
-    .art-image, .art-description {
+        padding: 2rem 0.5rem;
+        gap: 1rem;
         width: 100%;
-        transform: none !important;
     }
 
-    .art-section:hover .art-image,
-    .art-section:hover .art-description {
-        transform: none !important;
+    .art-image {
+        padding: 10px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .art-image img {
+        width: 100%;
+        height: auto;
+        max-height: 50vh;
+        object-fit: contain;
+    }
+
+    .art-description {
+        width: 100%;
+        padding: 1rem 0.5rem;
     }
 
     .hero-content h1 {
@@ -421,7 +433,7 @@ body {
 
 @media screen and (max-width: 480px) {
     .art-section {
-        padding: 1.5rem 0.5rem;
+        padding: 1rem 0.5rem;
     }
 
     .art-image {
@@ -429,11 +441,11 @@ body {
     }
 
     .art-image img {
-        aspect-ratio: 1/1;
+        max-height: 40vh;
     }
 
     .gallery {
-        padding: 4rem 1rem;
+        padding: 2rem 0.5rem;
     }
 }
 
