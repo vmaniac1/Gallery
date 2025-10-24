@@ -165,14 +165,25 @@ body {
     backface-visibility: hidden;
     flex: 1;
     max-width: 100%;
+    overflow: hidden; /* prevent image overflow on small screens */
 }
 
 .art-image img {
     width: 100%;
     height: auto;
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
+    /* remove aspect-ratio here so images scale naturally on phones */
+    aspect-ratio: auto;
+}
+
+/* Desktop: keep a pleasing 16:9 crop for larger screens */
+@media screen and (min-width: 769px) {
+	.art-image img {
+		aspect-ratio: 16/9;
+		object-fit: cover;
+	}
 }
 
 .art-image::before {
@@ -299,6 +310,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    width: auto;
+    max-width: 96%;
+    max-height: 96vh;
+    object-fit: contain;
 }
 
 .close-modal {
@@ -324,22 +339,39 @@ body {
     z-index: 1;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 1024px) {
-    .art-section {
-        padding: 4rem 2rem;
-        gap: 2rem;
-    }
-
-    .art-description blockquote {
-        font-size: 2rem;
-    }
-
-    .art-description p {
-        font-size: 1.4rem;
-    }
+/* Ensure all images are responsive by default */
+img {
+	/* global default for all images */
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
 }
 
+/* Make image container clip any overflow and preserve visual frames */
+.art-image {
+	/* ...existing code... */
+	overflow: hidden; /* prevent image overflow on small screens */
+}
+
+/* Remove forced aspect ratio on all screens; set only for larger viewports below */
+.art-image img {
+	/* ...existing code... */
+	/* remove aspect-ratio here so images scale naturally on phones */
+	aspect-ratio: auto;
+	object-fit: cover;
+}
+
+/* Desktop: keep a pleasing 16:9 crop for larger screens */
+@media screen and (min-width: 769px) {
+	.art-image img {
+		aspect-ratio: 16/9;
+		object-fit: cover;
+	}
+}
+
+/* Mobile improvements (ensure no overflow and sensible max heights) */
 @media screen and (max-width: 768px) {
     .navbar {
         padding: 1rem;
@@ -379,7 +411,7 @@ body {
     .art-image img {
         width: 100%;
         height: auto;
-        max-height: 50vh;
+        max-height: 55vh; /* limit to viewport to avoid overflow */
         object-fit: contain;
     }
 
@@ -415,7 +447,8 @@ body {
         width: 100%;
         max-width: 100%;
         height: auto;
-        aspect-ratio: 4/3;
+        max-height: 55vh; /* limit to viewport to avoid overflow */
+        object-fit: contain;
     }
 
     .art-description {
@@ -441,7 +474,8 @@ body {
     }
 
     .art-image img {
-        max-height: 40vh;
+        max-height: 45vh;
+        object-fit: contain;
     }
 
     .gallery {

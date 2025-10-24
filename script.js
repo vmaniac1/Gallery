@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('click', function() {
             modal.style.display = 'block';
             modalImg.src = this.src;
+            // ensure modal image respects responsive CSS
+            modalImg.style.width = '';
+            modalImg.style.height = '';
             setTimeout(() => modal.classList.add('show'), 10);
         });
     });
