@@ -165,6 +165,14 @@ body {
     backface-visibility: hidden;
 }
 
+.art-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
 .art-image::before {
     content: '';
     position: absolute;
@@ -380,21 +388,52 @@ body {
         font-size: 2rem;
         margin-bottom: 2rem;
     }
+
+    .art-section {
+        padding: 2rem 1rem;
+        gap: 1rem;
+    }
+
+    .art-image {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .art-image img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 4/3;
+    }
+
+    .art-description {
+        padding: 1rem;
+    }
+
+    /* Reset border radius for mobile */
+    .art-section:nth-child(1) .art-image,
+    .art-section:nth-child(2) .art-image,
+    .art-section:nth-child(3) .art-image,
+    .art-section:nth-child(4) .art-image {
+        border-radius: 10px;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    .art-description blockquote {
-        font-size: 1.5rem;
-        padding-left: 1rem;
+    .art-section {
+        padding: 1.5rem 0.5rem;
     }
 
-    .art-description p {
-        font-size: 1.1rem;
-        padding-left: 1rem;
+    .art-image {
+        padding: 5px;
     }
 
-    .modal-content {
-        width: 95%;
+    .art-image img {
+        aspect-ratio: 1/1;
+    }
+
+    .gallery {
+        padding: 4rem 1rem;
     }
 }
 
