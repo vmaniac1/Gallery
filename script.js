@@ -124,3 +124,53 @@ document.addEventListener('click', (e) => {
         navLinks.classList.remove('active');
     }
 });
+
+// Initialize GSAP ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// Animate art sections on scroll
+document.querySelectorAll('.art-section').forEach((section, index) => {
+    gsap.fromTo(section, 
+        {
+            opacity: 0,
+            rotateX: 20,
+            translateZ: -300,
+            translateY: 100
+        },
+        {
+            opacity: 1,
+            rotateX: 0,
+            translateZ: 0,
+            translateY: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                end: "top 30%",
+                scrub: 1,
+                toggleActions: "play none none reverse"
+            }
+        }
+    );
+
+    // Parallax effect for images
+    gsap.fromTo(section.querySelector('.art-image'), 
+        {
+            rotateY: -15,
+            translateZ: -100
+        },
+        {
+            rotateY: 0,
+            translateZ: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: section,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        }
+    );
+});
