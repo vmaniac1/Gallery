@@ -158,24 +158,137 @@
         if (typeof gsap !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
 
-            document.querySelectorAll('.art-section').forEach((section) => {
+            // Check if mobile
+            const isMobile = window.innerWidth <= 768;
+
+            document.querySelectorAll('.art-section').forEach((section, index) => {
+                const image = section.querySelector('.art-image');
+                const description = section.querySelector('.art-description');
+                const isEven = index % 2 === 0;
+
+                // Section entrance animation
                 gsap.fromTo(section, 
                     {
                         opacity: 0,
-                        y: 100
+                        y: isMobile ? 50 : 100,
+                        rotateX: isMobile ? 0 : -15
                     },
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 1,
-                        ease: "power2.out",
+                        rotateX: 0,
+                        duration: isMobile ? 0.8 : 1.2,
+                        ease: "power3.out",
                         scrollTrigger: {
                             trigger: section,
-                            start: "top 80%",
-                            end: "top 30%",
+                            start: isMobile ? "top 90%" : "top 85%",
+                            end: isMobile ? "top 60%" : "top 40%",
                             toggleActions: "play none none reverse"
                         }
                     }
                 );
+
+                // Only apply parallax effects on desktop
+                if (!isMobile) {
+                    // Image parallax effect
+                    gsap.fromTo(image, 
+                        {
+                            x: isEven ? -100 : 100,
+                            rotateY: isEven ? -10 : 10,
+                            opacity: 0
+                        },
+                        {
+                            x: 0,
+                            rotateY: 0,
+                            opacity: 1,
+                            duration: 1.5,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 80%",
+                                end: "top 30%",
+                                scrub: 1
+                            }
+                        }
+                    );
+
+                    // Description animation
+                    gsap.fromTo(description, 
+                        {
+                            x: isEven ? 100 : -100,
+                            opacity: 0
+                        },
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 1.2,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 75%",
+                                end: "top 35%",
+                                scrub: 1
+                            }
+                        }
+                    );
+
+                    // Continuous parallax on scroll
+                    gsap.to(image, {
+                        y: -50,
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 2
+                        }
+                    });
+                } else {
+                    // Simple fade in for mobile
+                    gsap.fromTo(image, 
+                        {
+                            opacity: 0,
+                            y: 30
+                        },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 85%",
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    );
+
+                    gsap.fromTo(description, 
+                        {
+                            opacity: 0,
+                            y: 20
+                        },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            delay: 0.2,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top 85%",
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    );
+                }
+            });
+
+            // Refresh ScrollTrigger on window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 250);
             });
         }
