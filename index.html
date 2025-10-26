@@ -25,67 +25,139 @@
 
     <section id="home" class="hero">
         <div id="vanta-background"></div>
-        <div class="hero-content">
-            <h1>Welcome to ArtSpace</h1>
-            <p>Discover the beauty of contemporary art</p>
-            <a href="#gallery" class="cta-button">Explore Gallery</a>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Welcome to ArtSpace</h1>
+                <p>Discover the beauty of contemporary art</p>
+                <a href="#gallery" class="cta-button">
+                    <span>Explore Gallery</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+
+            <!-- Image Carousel Preview -->
+            <div class="hero-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-card">
+                            <img src="img/1.jpg" alt="Nature Series">
+                            <div class="card-tag">Nature</div>
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/2.jpg" alt="Conceptual Art">
+                            <div class="card-tag">Conceptual</div>
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/3.jpg" alt="Landscape">
+                            <div class="card-tag">Landscape</div>
+                        </div>
+                        <div class="carousel-card">
+                            <img src="img/4.jpg" alt="Street Photography">
+                            <div class="card-tag">Street</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <div class="carousel-nav">
+                    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <div class="carousel-dots"></div>
+                    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
         </div>
     </section>
 
     <section id="gallery" class="gallery">
         <h2>Our Collection</h2>
+        <p class="gallery-subtitle">Curated works from talented contemporary artists</p>
         
-        <section class="art-section fade-in">
-            <div class="art-image">
-                <div class="art-image-wrapper">
-                    <img src="img/1.jpg" alt="The cute little Mushroom">
-                </div>
-            </div>
-            <div class="art-description">
-                <blockquote>"The cute little Mushroom"</blockquote>
-                <p>A closer look to the beauty of the living Mushrooms.</p>
-                <span class="artist-tag">Nature Photography</span>
-            </div>
-        </section>
+        <!-- Artist Filter Tabs -->
+        <div class="artist-filters">
+            <button class="filter-btn active" data-artist="all">All Artists</button>
+            <button class="filter-btn" data-artist="nature">Nature Series</button>
+            <button class="filter-btn" data-artist="conceptual">Conceptual Art</button>
+            <button class="filter-btn" data-artist="landscape">Landscapes</button>
+            <button class="filter-btn" data-artist="street">Street Photography</button>
+        </div>
 
-        <section class="art-section fade-in">
-            <div class="art-image">
-                <div class="art-image-wrapper">
-                    <img src="img/2.jpg" alt="Sunbath Bear">
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <!-- Artist 1: Nature Series -->
+            <div class="gallery-item" data-artist="nature">
+                <div class="gallery-card">
+                    <div class="card-image">
+                        <img src="img/1.jpg" alt="The cute little Mushroom">
+                        <div class="card-overlay">
+                            <button class="view-btn"><i class="fas fa-search-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="artist-label">Nature Series</span>
+                        <h3>The cute little Mushroom</h3>
+                        <p>A closer look to the beauty of living Mushrooms.</p>
+                    </div>
                 </div>
             </div>
-            <div class="art-description">
-                <blockquote>"Sunbath Bear"</blockquote>
-                <p>Who says its okay to put Teddy bears in the cold?</p>
-                <span class="artist-tag">Conceptual Art</span>
-            </div>
-        </section>
 
-        <section class="art-section fade-in">
-            <div class="art-image">
-                <div class="art-image-wrapper">
-                    <img src="img/3.jpg" alt="A view in the valley">
+            <!-- Artist 2: Conceptual Art -->
+            <div class="gallery-item" data-artist="conceptual">
+                <div class="gallery-card">
+                    <div class="card-image">
+                        <img src="img/2.jpg" alt="Sunbath Bear">
+                        <div class="card-overlay">
+                            <button class="view-btn"><i class="fas fa-search-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="artist-label">Conceptual Art</span>
+                        <h3>Sunbath Bear</h3>
+                        <p>Who says it's okay to put Teddy bears in the cold?</p>
+                    </div>
                 </div>
             </div>
-            <div class="art-description">
-                <blockquote>"A view in the valley"</blockquote>
-                <p>Take a deep breath, clear your mind.</p>
-                <span class="artist-tag">Landscape</span>
-            </div>
-        </section>
 
-        <section class="art-section fade-in">
-            <div class="art-image">
-                <div class="art-image-wrapper">
-                    <img src="img/4.jpg" alt="Clown Car">
+            <!-- Artist 3: Landscapes -->
+            <div class="gallery-item" data-artist="landscape">
+                <div class="gallery-card">
+                    <div class="card-image">
+                        <img src="img/3.jpg" alt="A view in the valley">
+                        <div class="card-overlay">
+                            <button class="view-btn"><i class="fas fa-search-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="artist-label">Landscape</span>
+                        <h3>A view in the valley</h3>
+                        <p>Take a deep breath, clear your mind.</p>
+                    </div>
                 </div>
             </div>
-            <div class="art-description">
-                <blockquote>"Clown Car"</blockquote>
-                <p>Today the clown crew took the bigger car.</p>
-                <span class="artist-tag">Street Photography</span>
+
+            <!-- Artist 4: Street Photography -->
+            <div class="gallery-item" data-artist="street">
+                <div class="gallery-card">
+                    <div class="card-image">
+                        <img src="img/4.jpg" alt="Clown Car">
+                        <div class="card-overlay">
+                            <button class="view-btn"><i class="fas fa-search-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="artist-label">Street Photography</span>
+                        <h3>Clown Car</h3>
+                        <p>Today the clown crew took the bigger car.</p>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
     </section>
 
     <footer class="site-footer">

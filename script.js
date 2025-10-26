@@ -292,3 +292,186 @@
                 }, 250);
             });
         }
+
+        // Gallery Filtering
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const artist = this.getAttribute('data-artist');
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Filter gallery items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    const itemArtist = item.getAttribute('data-artist');
+                    
+                    if (artist === 'all' || itemArtist === artist) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Gallery Card Click Handler
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const img = this.closest('.gallery-card').querySelector('.card-image img');
+                if (modal && modalImg) {
+                    modal.style.display = 'block';
+                    modalImg.src = img.src;
+                    setTimeout(() => modal.classList.add('show'), 10);
+                }
+            });
+        });
+
+        // GSAP animations for gallery cards
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Animate gallery cards on scroll
+            gsap.utils.toArray('.gallery-item').forEach((item, index) => {
+                gsap.fromTo(item,
+                    {
+                        opacity: 0,
+                        y: 50,
+                        scale: 0.9
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.6,
+                        delay: index * 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // Animate filter buttons
+            gsap.fromTo('.artist-filters',
+                {
+                    opacity: 0,
+                    y: -20
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: '.gallery',
+                        start: "top 80%"
+                    }
+                }
+            );
+
+            // Refresh ScrollTrigger on window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    ScrollTrigger.refresh();
+                }, 250);
+            });
+        }
+
+        // Hero Carousel Functionality
+        const carouselTrack = document.querySelector('.carousel-track');
+        const carouselCards = document.querySelectorAll('.carousel-card');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        
+        let currentSlide = 0;
+        const totalSlides = carouselCards.length;
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function updateCarousel() {
+            if (carouselTrack) {
+                carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+        }
+
+        // Auto-play carousel
+        let autoplayInterval = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        if (carouselTrack) {
+            carouselTrack.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+
+            carouselTrack.addEventListener('mouseleave', () => {
+                autoplayInterval = setInterval(nextSlide, 5000);
+            });
+        }
+
+        // Touch swipe for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        if (carouselTrack) {
+            carouselTrack.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            carouselTrack.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+        }
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevSlide();
+            }
+        }
